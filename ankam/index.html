@@ -65,6 +65,12 @@ body {
   left: 1rem;
 }
 
+.buttons button#next {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+}
+
 .buttons button {
   border: 2px solid #e5ebf3;
   background-color: transparent;
@@ -73,16 +79,13 @@ body {
   padding: 13px 15px;
   border-radius: 50%;
   outline: none;
-  transition: background-color 0.3s, color 0.3s;
+  opacity: 0.2; /* Initial opacity */
+  transition: opacity 0.3s; /* Smooth transition */
 }
 
 .buttons button:hover {
+  opacity: 0.8; /* Fully visible on hover */
   background-image: linear-gradient(to right, #C10DD9, #1374F2, #F28705);
-  color: white;
-}
-
-.buttons button:hover {
-  background-image: linear-gradient(to right, rgba(193, 13, 217, 0.69), rgba(19, 116, 242, 0.69), rgba(242, 135, 5, 0.69));
   color: white;
 }
 
