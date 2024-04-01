@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Share Section</title>
+    <style>
+        .share-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .share-btn {
+            margin: 0 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: transparent;
+            color: black;
+            border: none;
+            outline: none;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="share-section">
+        <button class="share-btn" onclick="copyToClipboard()">SHARE</button>
+        <a class="share-btn" href="https://twitter.com/intent/tweet?text=Hey%2C%20let%27s%20watch%20ANONG%20NANGYARI%20KAY%20ANDREW%20MAGSILANG%20by%20BIG%20TWIST.%20Trailer%3A%20https%3A%2F%2Fyoutu.be%2FWUnwo3Hbvus" target="_blank">X</a>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const message = "Hey, let's watch ANONG NANGYARI KAY ANDREW MAGSILANG by BIG TWIST. Trailer: https://youtu.be/WUnwo3Hbvus";
+            navigator.clipboard.writeText(message);
+            alert("Message copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
