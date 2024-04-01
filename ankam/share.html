@@ -1,86 +1,50 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
-    <title>Share Section</title>
-
     <style>
-
         body {
-
             font-family: Arial, sans-serif;
-
+            text-align: left;
         }
-
-        .share-section {
-
-            display: flex;
-
-            justify-content: flex-start; /* Updated */
-
-            align-items: center;
-
+        .share-button {
+        	font-weight: bold;
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid white;
             color: white;
-
-            font-weight: bold;
-
-            border-radius: 5px;
-
-        }
-
-        .share-btn {
-
-            font-family: Arial, sans-serif;
-
-            margin: 0 5px;
-
-            cursor: pointer;
-
-            background-color: transparent;
-
-            font-weight: bold;
-
-            color: white;
-
-            border: none;
-
-            outline: none;
-
+            background: none;
             text-decoration: none;
-
+            transition: background-color 0.3s, color 0.3s;
+            width: 150px; /* Set the width for uniformity */
+            text-align: center;
+            margin-right: 10px; /* Add margin between buttons */
+            border-radius: 20px; /* Make the edges rounder */
+            cursor: pointer;
         }
-
+        .share-button:hover {
+            background-color: white;
+            color: #1374F2;
+        }
+        .share-button:focus {
+            outline: none;
+        }
     </style>
-
 </head>
-
 <body>
-
-    <div class="share-section">
-
-        <button class="share-btn" onclick="copyToClipboard()">SHARE</button>
-
-        <a class="share-btn" href="https://twitter.com/intent/tweet?text=Hey%2C%20let%27s%20watch%20ANONG%20NANGYARI%20KAY%20ANDREW%20MAGSILANG%20by%20BIG%20TWIST.%20Trailer%3A%20https%3A%2F%2Fyoutu.be%2FWUnwo3Hbvus" target="_blank">X</a>
-
-    </div>
-
-​
+    <button class="share-button" onclick="copyToClipboard()">SHARE</button>
+    <button class="share-button" onclick="tweet()">X</button>
 
     <script>
-
         function copyToClipboard() {
-
             const message = "Hey, let's watch ANONG NANGYARI KAY ANDREW MAGSILANG by BIG TWIST. Trailer: https://youtu.be/WUnwo3Hbvus";
-
-            navigator.clipboard.writeText(message);
-
-            alert("Message copied to clipboard");
-
+            navigator.clipboard.writeText(message)
+                .then(() => alert('The message has been copied.'))
+                .catch((error) => console.error('Failed to copy: ', error));
         }
 
+        function tweet() {
+            window.open("https://twitter.com/intent/tweet?url=https://youtu.be/WUnwo3Hbvus&text=Hey,%20let's%20watch%20ANONG%20NANGYARI%20KAY%20ANDREW%20MAGSILANG%20by%20BIG%20TWIST.%20Trailer:%20https://youtu.be/WUnwo3Hbvus", "_blank");
+        }
     </script>
-
-​
-
+</body>
+</html>
