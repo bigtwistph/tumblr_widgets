@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gallery</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,11 +17,17 @@
 
         .gallery-item {
             position: relative;
-            flex: 0 0 50%; /* 2 columns per row */
-            max-width: 50%;
+            flex: 0 0 calc(33.33% - 4px); /* 3 columns per row with some spacing */
+            max-width: calc(33.33% - 4px);
             box-sizing: border-box;
             padding: 2px; /* Thin outline */
             overflow: hidden; /* Hide overflowing text */
+        }
+
+        .gallery-item a {
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
         .gallery-item img {
@@ -30,16 +35,16 @@
             height: 100%;
             object-fit: cover; /* Cover the entire container */
             cursor: pointer; /* Change cursor to pointer */
+            opacity: 0.6; /* Default opacity */
             transition: opacity 0.3s; /* Add transition effect */
         }
 
         .gallery-item:hover img {
-            opacity: 0.9; /* Reduce opacity on hover */
+            opacity: 1; /* Full opacity on hover */
         }
 
         .image-text {
             position: absolute;
-            font-weight: bold;
             top: 10px;
             left: 10px;
             width: calc(100% - 20px); /* Account for padding */
@@ -51,64 +56,118 @@
             margin: 10px; /* Standard margin around text */
         }
 
+        .pagination {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .pagination-circle {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: white;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: opacity 0.3s; /* Add transition effect */
+        }
+
+        .pagination-circle.active {
+            opacity: 1; /* Full opacity for active circle */
+        }
+
         @media (max-width: 768px) {
             .gallery-item {
                 flex: 0 0 100%; /* stack items on top of each other */
                 max-width: 100%;
+            }
+
+            .gallery {
+                overflow-x: hidden; /* Hide horizontal overflow */
             }
         }
     </style>
 </head>
 <body>
     <div class="gallery">
-        <!-- Add more gallery items as needed -->
+        <div class="gallery-item">
+            <a href="#">
+                <img src="https://via.placeholder.com/400x300" alt="Placeholder Image">
+                <div class="image-text">Image 1</div>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="#">
+                <img src="https://via.placeholder.com/400x300" alt="Placeholder Image">
+                <div class="image-text">Image 2</div>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="#">
+                <img src="https://via.placeholder.com/400x300" alt="Placeholder Image">
+                <div class="image-text">Image 3</div>
+            </a>
+        </div>
         <div class="gallery-item">
             <a href="https://bigtwistph.tumblr.com">
                 <img src="https://filmfreeway-production-storage-01-storage.filmfreeway.com/attachments/files/004/032/812/original/vlcsnap-2019-03-02-15h32m15s019.jpg?1560581354" alt="Placeholder Image">
-                <div class="image-text">Image 1</div>
+                <div class="image-text">Image 4</div>
             </a>
         </div>
         <div class="gallery-item">
-            <a href="https://bigtwistph.tumblr.com">
-                <img src="https://www.alidays.it/wp-content/uploads/2019/01/400x300.png" alt="Placeholder Image">
-                <div class="image-text">Image 2</div>
+            <a href="#">
+                <img src="https://via.placeholder.com/400x300" alt="Placeholder Image">
+                <div class="image-text">Image 5</div>
             </a>
         </div>
         <div class="gallery-item">
-            <a href="https://bigtwistph.tumblr.com">
-                <img src="https://www.alidays.it/wp-content/uploads/2019/01/400x300.png" alt="Placeholder Image">
-                <div class="image-text">Image 1</div>
-            </a>
-        </div>
-        <div class="gallery-item">
-            <a href="https://bigtwistph.tumblr.com">
-                <img src="https://www.alidays.it/wp-content/uploads/2019/01/400x300.png" alt="Placeholder Image">
-                <div class="image-text">Image 2</div>
-            </a>
-        </div>
-         <div class="gallery-item">
-            <a href="https://bigtwistph.tumblr.com">
-                <img src="https://www.alidays.it/wp-content/uploads/2019/01/400x300.png" alt="Placeholder Image">
-                <div class="image-text">Image 1</div>
-            </a>
-        </div>
-        <div class="gallery-item">
-            <a href="https://bigtwistph.tumblr.com">
-                <img src="https://www.alidays.it/wp-content/uploads/2019/01/400x300.png" alt="Placeholder Image">
-                <div class="image-text">Image 2</div>
+            <a href="#">
+                <img src="https://via.placeholder.com/400x300" alt="Placeholder Image">
+                <div class="image-text">Image 6</div>
             </a>
         </div>
         <!-- Add more gallery items as needed -->
     </div>
 
+    <div class="pagination">
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.gallery-item a').click(function(event) {
-                event.preventDefault(); // Prevent default link behavior
-                var url = $(this).attr('href'); // Get the href attribute of the clicked link
-                window.location.href = url; // Redirect to the URL
-            });
+            var currentIndex = 0;
+            var items = $('.gallery-item');
+            var numItems = items.length;
+            var pageSize = 3; // Number of items per page
+
+            function showItems(startIndex) {
+                items.hide();
+                items.slice(startIndex, startIndex + pageSize).show();
+            }
+
+            function updatePagination() {
+                var numPages = Math.ceil(numItems / pageSize);
+                $('.pagination').empty();
+                for (var i = 0; i < numPages; i++) {
+                    var circle = $('<div class="pagination-circle"></div>');
+                    circle.click(function() {
+                        var index = $(this).index();
+                        currentIndex = index * pageSize;
+                        showItems(currentIndex);
+                        updatePagination();
+                    });
+                    if (currentIndex >= i * pageSize && currentIndex < (i + 1) * pageSize) {
+                        circle.addClass('active').css('opacity', '1');
+                    }
+                    else {
+                        circle.css('opacity', '0.6');
+                    }
+                    $('.pagination').append(circle);
+                }
+            }
+
+            showItems(currentIndex);
+            updatePagination();
         });
     </script>
 </body>
