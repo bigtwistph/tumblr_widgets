@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .gallery-item {
+            position: relative;
+            flex: 0 0 50%; /* 2 columns per row */
+            max-width: 50%;
+            box-sizing: border-box;
+            padding: 2px; /* Thin outline */
+            overflow: hidden; /* Hide overflowing text */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.69; /* 69% opacity by default */
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover img {
+            opacity: 1; /* 100% opacity on hover */
+        }
+
+        .image-text {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: calc(100% - 20px); /* Account for padding */
+            padding: 5px;
+            box-sizing: border-box;
+            color: #fff;
+            text-align: left;
+            opacity: 1; /* full opacity for text */
+            margin: 10px; /* Standard margin around text */
+        }
+
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex: 0 0 100%; /* stack items on top of each other */
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <div class="gallery-item">
+            <a href="https://bigtwistph.tumblr.com">
+                <img src="https://via.placeholder.com/400x300" alt="Placeholder Image">
+                <div class="image-text">Image 1</div>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://bigtwistph.tumblr.com">
+                <img src="https://via.placeholder.com/400x300" alt="Placeholder Image">
+                <div class="image-text">Image 2</div>
+            </a>
+        </div>
+        <!-- Add more gallery items as needed -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.gallery-item a').click(function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                var url = $(this).attr('href'); // Get the href attribute of the clicked link
+                window.location.href = url; // Redirect to the URL
+            });
+        });
+    </script>
+</body>
+</html>
