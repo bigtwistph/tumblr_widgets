@@ -36,12 +36,17 @@ body {
   height: 100%;
   opacity: 0;
   transition: opacity 0.4s ease-in-out;
+  overflow: hidden; /* Added to hide overflow when zooming */
 }
 
 .slide.current {
   opacity: 1;
 }
 
+.slide:hover {
+  transform: scale(1.1); /* Zoom in by 10% on hover */
+  z-index: 1; /* Bring the hovered image to the front */
+}
 
 .slide:first-child {
   background: url("1.png") no-repeat
