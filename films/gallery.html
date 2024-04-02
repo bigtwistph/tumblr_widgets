@@ -27,14 +27,14 @@
 
         .gallery-item img {
             width: 100%;
-            height: auto;
-            display: block;
-            opacity: 0.69; /* 69% opacity by default */
-            transition: none;
+            height: 100%;
+            object-fit: cover; /* Cover the entire container */
+            cursor: pointer; /* Change cursor to pointer */
+            transition: opacity 0.3s; /* Add transition effect */
         }
 
         .gallery-item:hover img {
-            opacity: 1; /* 100% opacity on hover */
+            opacity: 0.9; /* Reduce opacity on hover */
         }
 
         .image-text {
@@ -63,7 +63,7 @@
         <!-- Add more gallery items as needed -->
         <div class="gallery-item">
             <a href="https://bigtwistph.tumblr.com">
-                <img src="https://www.alidays.it/wp-content/uploads/2019/01/400x300.png" alt="Placeholder Image">
+                <img src="https://filmfreeway-production-storage-01-storage.filmfreeway.com/attachments/files/004/032/812/original/vlcsnap-2019-03-02-15h32m15s019.jpg?1560581354" alt="Placeholder Image">
                 <div class="image-text">Image 1</div>
             </a>
         </div>
