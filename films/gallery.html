@@ -7,7 +7,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background: black;
         }
 
         .gallery {
@@ -18,19 +17,17 @@
 
         .gallery-item {
             position: relative;
-            flex: 0 0 calc(33.33% - 4px); /* 3 columns per row with some spacing */
-            max-width: calc(33.33% - 4px);
+            flex: 1 0 33.33%; /* 3 columns per row */
+            max-width: 33.33%;
             box-sizing: border-box;
-            padding: 2px; /* Thin outline */
-            overflow: hidden; /* Hide overflowing text */
-            height: 0;
-            padding-bottom: 75%; /* 4:3 aspect ratio (4/3 * 100) */
+            overflow: hidden; /* Hide overflowing content */
         }
 
-        .gallery-item a {
-            display: block;
+        .gallery-item .image-container {
+            position: relative;
             width: 100%;
-            height: 100%;
+            height: 0;
+            padding-bottom: 75%; /* 4:3 aspect ratio */
         }
 
         .gallery-item img {
@@ -50,15 +47,25 @@
 
         .image-text {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            width: calc(100% - 20px); /* Account for padding */
-            padding: 5px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
             box-sizing: border-box;
             color: #fff;
             text-align: left;
-            opacity: 1; /* full opacity for text */
-            margin: 10px; /* Standard margin around text */
+            opacity: 0; /* Hidden by default */
+        }
+
+        .gallery-item:hover .image-text {
+            opacity: 1; /* Full opacity on hover */
+        }
+
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex: 0 0 100%; /* stack items on top of each other */
+                max-width: 100%;
+            }
         }
 
         .pagination {
@@ -80,48 +87,47 @@
         .pagination-circle.active {
             opacity: 1; /* Full opacity for active circle */
         }
-
-        @media (max-width: 768px) {
-    .gallery-item {
-        flex: 0 0 100%; /* stack items on top of each other */
-        max-width: 100%;
-        height: 0;
-        padding-bottom: 75%; /* 4:3 aspect ratio (4/3 * 100) */
-    }
-}
-
-
     </style>
 </head>
 <body>
     <div class="gallery">
         <div class="gallery-item">
             <a href="https://bigtwistph.tumblr.com/wala" target="_blank">
-                <img src="https://bigtwistph.github.io/tumblr_widgets/films/1.png" alt="Sad girl">
+                <div class="image-container">
+                    <img src="https://bigtwistph.github.io/tumblr_widgets/films/1.png" alt="Sad girl">
+                </div>
                 <div class="image-text"><span style="font-weight: 300;">Wala</span><span style="font-size:10px; opacity: 0.7;"><br>2022</span></div>
             </a>
         </div>
         <div class="gallery-item">
             <a href="https://bigtwistph.tumblr.com/you-are-here" target="_blank">
-                <img src="https://bigtwistph.github.io/tumblr_widgets/films/2.png" alt="Pixelated Hopeful boy">
+                <div class="image-container">
+                    <img src="https://bigtwistph.github.io/tumblr_widgets/films/2.png" alt="Pixelated Hopeful boy">
+                </div>
                 <div class="image-text">You Are Here<span style="font-size:10px; opacity: 0.7;"><br>2020</span></div>
             </a>
         </div>
         <div class="gallery-item">
             <a href="https://bigtwistph.tumblr.com/condolence" target="_blank">
-                <img src="https://bigtwistph.github.io/tumblr_widgets/films/3.png" alt="Sad boy in a wake">
+                <div class="image-container">
+                    <img src="https://bigtwistph.github.io/tumblr_widgets/films/3.png" alt="Sad boy in a wake">
+                </div>
                 <div class="image-text">Condolence<span style="font-size:10px; opacity: 0.7;"><br>2019</span></div>
             </a>
         </div>
         <div class="gallery-item">
             <a href="https://bigtwistph.tumblr.com/growing-up" target="_blank">
-                <img src="https://bigtwistph.github.io/tumblr_widgets/films/4.jpg" alt="A hand accepting an envelope">
+                <div class="image-container">
+                    <img src="https://bigtwistph.github.io/tumblr_widgets/films/4.jpg" alt="A hand accepting an envelope">
+                </div>
                 <div class="image-text">a short film about growing up<span style="font-size:10px; opacity: 0.7;"><br>2019</span></div>
             </a>
         </div>
         <div class="gallery-item">
             <a href="https://bigtwistph.tumblr.com/andrew-magsilang" target="_blank">
-                <img src="https://bigtwistph.github.io/tumblr_widgets/films/5.png" alt="Mysterious woman staring directly at camera">
+                <div class="image-container">
+                    <img src="https://bigtwistph.github.io/tumblr_widgets/films/5.png" alt="Mysterious woman staring directly at camera">
+                </div>
                 <div class="image-text">Anong Nangyari Kay Andrew Magsilang?<span style="font-size:10px; opacity: 0.7;"><br>2019</span></div>
             </a>
         </div>
@@ -129,6 +135,7 @@
     </div>
 
     <div class="pagination">
+        <!-- Pagination circles will be added here dynamically -->
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -169,5 +176,3 @@
             updatePagination();
         });
     </script>
-</body>
-</html>
