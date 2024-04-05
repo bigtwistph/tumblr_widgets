@@ -7,7 +7,7 @@
             text-align: left;
         }
         .share-button {
-        	font-weight: bold;
+            font-weight: bold;
             display: inline-block;
             padding: 8px 16px;
             border: 1px solid white;
@@ -28,6 +28,15 @@
         }
         .share-button:focus {
             outline: none;
+        }
+
+        @media (max-width: 600px) {
+            /* Adjust width and make buttons stack on top of each other */
+            .share-button {
+                width: 120px; /* Decrease width for uniformity */
+                margin-bottom: 10px; /* Add margin between stacked buttons */
+                display: block; /* Make buttons stack vertically */
+            }
         }
     </style>
 </head>
